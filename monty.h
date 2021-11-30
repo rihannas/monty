@@ -37,4 +37,19 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ *struct globals - global variable to hold all global variables
+ *@data_mod: the data mode
+ *@line: the line of command
+ *@fd: file discriptor
+ *@head: head of stack
+ */
+typedef struct globals
+{
+  char data_mod[6];
+  char *line;
+  FILE *fd;
+  stack_t *head;
+} globals;
+
 #endif
