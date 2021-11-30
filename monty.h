@@ -52,4 +52,16 @@ typedef struct globals
   stack_t *head;
 } globals;
 
+/*global variables*/
+extern globals global_vars;
+
+/**
+ * struct code_args_s -  argument information
+ * @args: a list of the aguments
+ * @argc: number of arguments to passed
+ * 0 - means none,
+ * 1 - means 1,
+ * 2 - more than one
+ */
+
 #endif
