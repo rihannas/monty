@@ -3,9 +3,23 @@
 /**
  * pall - calls print_stack func
  * @stack: doubly linked list to store data
- * @ln: line number
+ * @line_number: no:of lines in a file
  */
-void pall(stack_t **stack, unsigned int ln __attribute__((unused)))
+void pall(stack_t **stack, unsigned int line_number)
 {
-  print_stack(*stack);
+  stack_t *tmp;
+  tmp = *stack;
+
+  if (tmp == NULL)
+  {
+	  return;
+  }
+
+  (void) line_number;
+
+  while (tmp)
+  {
+	  printf("%d\n", tmp->n);
+	  tmp = tmp->prev;
+  }
 }

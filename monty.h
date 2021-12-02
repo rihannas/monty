@@ -1,12 +1,11 @@
-#ifndef __MONTY_H__
-#define __MONTY_H__
+#ifndef _MONTY_H_
+#define _MONTY_H_
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <ctype.h>
 #include <string.h>
-
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -25,11 +24,12 @@ typedef struct stack_s
 } stack_t;
 
 /**
- * struct instruction_s - opcoode and its function
+ * struct instruction_s - opcode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
  * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
  */
 typedef struct instruction_s
 {
@@ -37,32 +37,8 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/*global variables*/
-extern globals global_vars;
-
-void global_free(void);
-
-/**
- *struct globals - global variable to hold all global variables
- *@data_mod: the data mode
- *@line: the line of command
- *@fd: file discriptor
- *@head: head of stack
- */
-
-typedef struct globals
-{
-	char data_mod[6];
-	char *line;
-	FILE *fd
-	stack_t *head;
-} globals;
-
-void read_file(char *file, stack_t **stack);
-void parse_command(stack_t **stack, char *op, unsigned int line_num);
-
-void push(stack_t **stack, unsigned int ln);
-void pall(stack_t **stack, unsigned int ln __attribute__((unused)));
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
