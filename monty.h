@@ -37,9 +37,26 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t **global_head;
+/*global variables*/
+extern globals global_vars;
 
 void global_free(void);
+
+/**
+ *struct globals - global variable to hold all global variables
+ *@data_mod: the data mode
+ *@line: the line of command
+ *@fd: file discriptor
+ *@head: head of stack
+ */
+
+typedef struct globals
+{
+	char data_mod[6];
+	char *line;
+	FILE *fd
+	stack_t *head;
+} globals;
 
 void read_file(char *file, stack_t **stack);
 void parse_command(stack_t **stack, char *op, unsigned int line_num);
