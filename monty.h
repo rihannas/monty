@@ -44,12 +44,13 @@ typedef struct instruction_s
  *@fd: file discriptor
  *@head: head of stack
  */
+
 typedef struct globals
 {
-  char data_mod[6];
-  char *line;
-  FILE *fd;
-  stack_t *head;
+ char data_mod[6];
+ char *line;
+ FILE *fd;
+ stack_t *head;
 } globals;
 
 /*global variables*/
@@ -64,6 +65,8 @@ extern globals global_vars;
  * 2 - more than one
  */
 
+void push(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
