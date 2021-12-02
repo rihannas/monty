@@ -9,35 +9,35 @@
  */
 void _push(stack_t **stack, unsigned int line_number)
 {
-	size_t len = 0, i = 0;
-	char arg[128] = "";
-	char *argument = arg;
+  size_t len = 0, i = 0;
+  char arg[128] = "";
+  char *argument = arg;
 
-	argument = strtok(NULL, " \t\r\n\v\f");
+  argument = strtok(NULL, " \t\r\n\v\f");
 
-	if (argument == NULL)
-	{
-		dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
-		free_stack_t(*stack);
+  if (argument == NULL)
+    {
+      dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
+      free_stack_t(*stack);
 
-		exit(EXIT_FAILURE);
-	}
+      exit(EXIT_FAILURE);
+    }
 
-	len = strlen(argument);
-	for (i = 0; i < len; i++)
-		if (!isdigit(argument[i]) && argument[0] != '-')
-		{
-			dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
-			free_stack_t(*stack);
+  len = strlen(argument);
+  for (i = 0; i < len; i++)
+    if (!isdigit(argument[i]) && argument[0] != '-')
+      {
+	dprintf(STDERR_FILENO, "L%u: usage: push integer\n", line_number);
+	free_stack_t(*stack);
 
-			exit(EXIT_FAILURE);
-		}
+	exit(EXIT_FAILURE);
+      }
 
-	if (stack_queue == 's')
-		add_node(stack, atoi(argument));
+  if (stack_queue == 's')
+    add_node(stack, atoi(argument));
 
-	if (stack_queue == 'q')
-		add_node_queue(stack, atoi(argument));
+  if (stack_queue == 'q')
+    add_node_queue(stack, atoi(argument));
 }
 
 /**
@@ -49,29 +49,29 @@ void _push(stack_t **stack, unsigned int line_number)
  */
 void add_node(stack_t **stack, int argument)
 {
-	stack_t *new_node = NULL;
+  stack_t *new_node = NULL;
 
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
-		free_stack_t(*stack);
+  new_node = malloc(sizeof(stack_t));
+  if (new_node == NULL)
+    {
+      dprintf(STDERR_FILENO, "Error: malloc failed\n");
+      free_stack_t(*stack);
 
-		exit(EXIT_FAILURE);
-	}
+      exit(EXIT_FAILURE);
+    }
 
-	new_node->n = argument;
-	new_node->prev = NULL;
-	new_node->next = NULL;
+  new_node->n = argument;
+  new_node->prev = NULL;
+  new_node->next = NULL;
 
-	if (*stack == NULL)
-		*stack = new_node;
-	else
-	{
-		new_node->next = *stack;
-		(*stack)->prev = new_node;
-		*stack = new_node;
-	}
+  if (*stack == NULL)
+    *stack = new_node;
+  else
+    {
+      new_node->next = *stack;
+      (*stack)->prev = new_node;
+      *stack = new_node;
+    }
 }
 
 /**
@@ -83,30 +83,30 @@ void add_node(stack_t **stack, int argument)
  */
 void add_node_queue(stack_t **stack, int argument)
 {
-	stack_t *new_node = NULL, *last = NULL;
+  stack_t *new_node = NULL, *last = NULL;
 
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-	{
-		dprintf(STDERR_FILENO, "Error: malloc failed\n");
-		free_stack_t(*stack);
+  new_node = malloc(sizeof(stack_t));
+  if (new_node == NULL)
+    {
+      dprintf(STDERR_FILENO, "Error: malloc failed\n");
+      free_stack_t(*stack);
 
-		exit(EXIT_FAILURE);
-	}
+      exit(EXIT_FAILURE);
+    }
 
-	new_node->n = argument;
-	new_node->prev = NULL;
-	new_node->next = NULL;
+  new_node->n = argument;
+  new_node->prev = NULL;
+  new_node->next = NULL;
 
-	if (*stack == NULL)
-		*stack = new_node;
-	else
-	{
-		last = *stack;
-		while (last->next != NULL)
-			last = last->next;
-		new_node->next = NULL;
-		new_node->prev = last;
-		last->next = new_node;
-	}
+  if (*stack == NULL)
+    *stack = new_node;
+  else
+    {
+      last = *stack;
+      while (last->next != NULL)
+	last = last->next;
+      new_node->next = NULL;
+      new_node->prev = last;
+      last->next = new_node;
+    }
 }
