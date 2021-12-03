@@ -1,24 +1,36 @@
-0x19. C - Stacks, Queues - LIFO, FIFO
-  
-/* 0x19. C - Stacks, Queues - LIFO, FIFO (Monty Bytecode Interpreter)*/
+<h1> 0x19. C - Stacks, Queues - LIFO, FIFO <h1>
 
-/* Learning Objectives */
+/**
+ * struct stack_s - doubly linked list representation of a stack (or queue)
+ * @n: integer
+ * @prev: points to the previous element of the stack (or queue)
+ * @next: points to the next element of the stack (or queue)
+ *
+ * Description: doubly linked list node structure
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct stack_s
+{
+        int n;
+        struct stack_s *prev;
+        struct stack_s *next;
+} stack_t;
 
-What do LIFO and FIFO mean
+/**
+ * struct instruction_s - opcode and its function
+ * @opcode: the opcode
+ * @f: function to handle the opcode
+ *
+ * Description: opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project
+ */
+typedef struct instruction_s
+{
+        char *opcode;
+        void (*f)(stack_t **stack, unsigned int line_number);
+} instruction_t;
 
-What is a stack, and when to use it
+<h3> Compilation <h3>
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o monty
 
-What is a queue, and when to use it
-
-What are the common implementations of stacks and queues
-
-What are the most common use cases of stacks and queues
-
-What is the proper way to use global variables
-
- /*  Requirements */
  
- /* Compiled with Ubuntu 14.04 LTS with gcc 4.8.4 using the flags -Wall -Werror -Wextra and -pedantic*/
-
-/* How to install */
-/* $ gcc -Wall -Werror -Wextra -pedantic *.c -o monty */
