@@ -1,25 +1,21 @@
 #include "monty.h"
 
 /**
- * pall - calls print_stack func
- * @stack: doubly linked list to store data
- * @line_number: no:of lines in a file
+ * _pall - pushes an element to the stack.
+ * @stack: double pointer to header (top) of the stack.
+ * @line_number: counter for line number of the file.
+ *
+ * Return: void.
  */
-void pall(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int line_number)
 {
-  stack_t *tmp;
-  tmp = *stack;
-
-  if (tmp == NULL)
-  {
-	  return;
-  }
+  stack_t *current;
 
   (void) line_number;
-
-  while (tmp)
-  {
-	  printf("%d\n", tmp->n);
-	  tmp = tmp->prev;
-  }
+  current = *stack;
+  while (current != NULL)
+    {
+      printf("%d\n", current->n);
+      current = current->next;
+    }
 }
