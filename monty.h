@@ -4,30 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include <unistd.h>
-/**
- * struct globals - variables globales
- * @num: integer
- * @flag: integer
- * @line: string
- * @token: string
- * @opcod: function opcode in Monty
- * @fil: file
- */
-typedef struct globals
-{
-int num;
-int flag;
-char *line;
-char *token;
-char *opco;
-FILE *fil;
-} globals_t;
 
-extern globals_t global;
+/* Global */
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -39,10 +19,11 @@ extern globals_t global;
  */
 typedef struct stack_s
 {
-int n;
-struct stack_s *prev;
-struct stack_s *next;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
 } stack_t;
+
 
 /**
  * struct instruction_s - opcode and its function
@@ -54,34 +35,30 @@ struct stack_s *next;
  */
 typedef struct instruction_s
 {
-char *opcode;
-void (*f)(stack_t **stack, unsigned int line_number);
+	char *opcode;
+	void (*f)(stack_t **stack, unsigned int n_line);
 } instruction_t;
 
-void _mod(stack_t **stack, unsigned int num_line);
-void _pchar(stack_t **stack, unsigned int num_line);
-void _rotr(stack_t **stack, unsigned int num_line);
-void _rotl(stack_t **stack, unsigned int num_line);
-void _stack(stack_t **stack, unsigned int num_line);
-void _queue(stack_t **stack, unsigned int num_line);
-void _pstr(stack_t **stack, unsigned int num_line);
-void _mul(stack_t **stack, unsigned int num_line);
-void _verify2(stack_t **stack, unsigned int n);
-void _error(stack_t **stack, unsigned int n);
-void free_l(stack_t **stack);
-void _div(stack_t **stack, unsigned int num_line);
-void _sub(stack_t **stack, unsigned int num_line);
-void _nop(stack_t **stack, unsigned int num_line);
-int _verify1(char *num);
-int _size_line(char *line);
-char delete_jump(char *line);
-void _swap(stack_t **stack, __attribute__((unused)) unsigned int num_line);
-void _add(stack_t **stack, __attribute__((unused)) unsigned int num_line);
-void _pint(stack_t **stack, unsigned int num_line);
-void _pop(stack_t **stack, unsigned int num_line);
-void (*func(char *tokens))(stack_t **stack, unsigned int num_line);
-int main(__attribute__((unused)) int argc, char **argv);
-void _pall(stack_t **stack, unsigned int num_line);
-void _push(stack_t **stack, unsigned int num_line);
+/* Main Functions */
+void read_file(FILE *fd, char *file_name);
+void (*opcode_func(char *s))(stack_t **stack, unsigned int n_line);
 
+/* Opcode Functions */
+void mop_push(stack_t **stack, unsigned int n_line);
+void mop_pall(stack_t **stack, unsigned int n_line);
+void mop_pint(stack_t **stack, unsigned int n_line);
+void mop_nop(stack_t **stack, unsigned int n_line);
+void mop_pop(stack_t **stack, unsigned int n_line);
+void mop_swap(stack_t **stackk, unsigned int n_line);
+void mop_add(stack_t **stack, unsigned int n_line);
+void mop_sub(stack_t **stack, unsigned int n_line);
+void mop_div(stack_t **stack, unsigned int n_line);
+void mop_mul(stack_t **stack, unsigned int n_line);
+void mop_mod(stack_t **stack, unsigned int n_line);
+
+/* Aux Functions */
+int _isdigit(char *c);
+void rm_head(stack_t **head);
+size_t dlistint_len(const stack_t *h);
+void free_dlistint(stack_t *head);
 #endif
